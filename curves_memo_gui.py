@@ -57,7 +57,7 @@ class MemoPad(QMainWindow):
     
     def make_text_curves(self):
         a=self.textEdit.toPlainText()
-        self.tx.get_text(a)
+        self.tx.make_shape(a)
         #cmds.textCurves( f='Times-Roman', t=a )
         #print(self.textEdit.toPlainText())
 
