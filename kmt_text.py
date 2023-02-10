@@ -6,6 +6,7 @@ from maya import cmds as cmds
 class Text:
     def __init__(self,text):
         self.text = text
+        pass
 
     def get_text(self):
         small_text = unicodedata.normalize('NFKC',self.text)
