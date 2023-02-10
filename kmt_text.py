@@ -5,6 +5,9 @@ from maya import cmds as cmds
 
 class MakeCurves:
     def __init__(self,text):
+        """/////////////////////////////////////////
+        """
+        print("/////////////////////////////////////////////////////////////////")
         self.text = text
         self.tx = Text(self.text)
 
@@ -75,24 +78,6 @@ class MakeCurves:
             else:
                 print(f"{i} is non match node")
 
-    def rename_node(self,result):
-        """Scene内のノードを探して、重複してたら新しい名前を返す
-        """
-        #result = self.is_node()
-        if result:
-            b = re.search('[0-9]{1,3}$',self.node)
-            num = int(b.group(0))
-            num += 1
-
-            c = re.search(r'(.*?)\d{1,3}$',self.node)
-            self.new_name = c.group(1)+str(num)
-            return self.new_name
-
-        else:
-            print("普通にnode作る")
-            return 0
-            #self.get_text(self.text)
-
     def main(self):
         #カーブ作る
         #if Mayaで使える文字列ですか？:
@@ -104,10 +89,18 @@ class MakeCurves:
         #
         pass
     def make_curves(self,input_text):
-       cv_name,textCurvesNode = cmds.textCurves( f='times-roman',t = input_text)#カーブの生成はこれくらいシンプルにしないとアカン
-       print(cv_name)
-       self.rename_transform()
-       return cv_name,textCurvesNode
+        pas_text = self.tx.parsing()
+        result = self.tx.is_node(pas_text)
+        if result:
+            print("ある---------------")
+            new_name = tx.rename_node(result)
+            
+            return
+        else:
+            cv_name,textCurvesNode = cmds.textCurves( f='times-roman',t = input_text)#カーブの生成はこれくらいシンプルにしないとアカン
+            print(cv_name)
+            self.rename_transform()
+        return cv_name,textCurvesNode
 
 
 class Text:
