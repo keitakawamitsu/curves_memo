@@ -88,19 +88,25 @@ class MakeCurves:
         #シェイプマージ
         #
         pass
+    
     def make_curves(self,input_text):
         pas_text = self.tx.parsing()
         result = self.tx.is_node(pas_text)
         if result:
             print("ある---------------")
-            new_name = tx.rename_node(result)
-            
-            return
+            new_name = self.tx.rename_node(result)
+            #Scene調べて、
+            cv_name,textCurvesNode = cmds.textCurves( f='times-roman',t = input_text)
+            cmds.rename(cv_name,new_name)
+
+            return cv_name,textCurvesNode
         else:
             cv_name,textCurvesNode = cmds.textCurves( f='times-roman',t = input_text)#カーブの生成はこれくらいシンプルにしないとアカン
-            print(cv_name)
             self.rename_transform()
         return cv_name,textCurvesNode
+    
+
+
 
 
 class Text:
