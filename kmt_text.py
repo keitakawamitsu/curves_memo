@@ -66,10 +66,12 @@ class MakeCurves:
         pas_text = self.tx.parsing()
         pattern = r'^[Text]{1,4}_(.*?)_\d{1,3}$'
         allNodes = cmds.ls(typ="transform")
+        print(f"---------{allNodes}------------------")
         new_text =""
         for i in allNodes:#カーブ作った後のtransformノード調べて、matchする部分を取得
             a=re.search(pattern,i)
             if a:
+                print(f"-------{i}-------------")
                 str = a.group(1)
                 new_text = i.replace(str,pas_text)#パースされた文字と置き換え
                 cmds.rename(i,new_text)
@@ -92,22 +94,26 @@ class MakeCurves:
     def make_curves(self,input_text):
         pas_text = self.tx.parsing()
         result = self.tx.is_node(pas_text)
+
         if result:
             print("ある---------------")
             new_name = self.tx.rename_node(result)
-            #Scene調べて、
             cv_name,textCurvesNode = cmds.textCurves( f='times-roman',t = input_text)
             cmds.rename(cv_name,new_name)
 
             return cv_name,textCurvesNode
         else:
+            print("node ない場合の処理--------------------------------")
+
             cv_name,textCurvesNode = cmds.textCurves( f='times-roman',t = input_text)#カーブの生成はこれくらいシンプルにしないとアカン
-            self.rename_transform()
+            print(f"{cv_name} curves作った--------------------------------")
+            pattern = r'^[Text]{1,4}_(.*?)_\d{1,3}$'
+            a = re.search(pattern,cv_name)
+            str = a.group(1)
+            new_name = cv_name.replace(str,pas_text)#パースされた文字と置き換え
+            cmds.rename(cv_name,new_name)
         return cv_name,textCurvesNode
     
-
-
-
 
 class Text:
     def __init__(self, text=""):
@@ -182,6 +188,7 @@ class Text:
             return self.new_name
 
         else:
-            print("普通にnode作る")
-            return 0
+            pattern = r'^[a-zA-Z]{1,4}_(.*?)_\d{1,3}$'#先頭が1~4文字以内のアルファベット、最後が1~3桁の数字、真ん中はなんでもOK
+            c = re.search(pattern,self.node)
+            return c.group(1)
             #self.get_text(self.text)

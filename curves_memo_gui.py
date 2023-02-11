@@ -30,15 +30,13 @@ class MemoPad(QMainWindow):
         super(MemoPad, self).__init__(parent)
         close_child(self)
         self.mainGUI()
-        self.tx = kmt_text.Text()
     
     def mainGUI(self):
         self.resize(400, 100)
         self.setWindowTitle('Memo pad')
         self.textEdit = QTextEdit(self)
-        #self.setCentralWidget(self.textEdit)
         button = QPushButton(self.textEdit)
-        button.setText("aa")
+        button.setText("apply")
         button.clicked.connect(self.make_text_curves)
 
         self.text_h_layout = QHBoxLayout()
@@ -56,8 +54,9 @@ class MemoPad(QMainWindow):
         self.setCentralWidget(self.widget)
     
     def make_text_curves(self):
-        a=self.textEdit.toPlainText()
-        self.tx.make_shape(a)
+        text = self.textEdit.toPlainText()
+        cv = kmt_text.MakeCurves(text)
+        cv.make_curves(text)
         #cmds.textCurves( f='Times-Roman', t=a )
         #print(self.textEdit.toPlainText())
 
