@@ -35,6 +35,7 @@ class MemoPad(QMainWindow):
         self.resize(400, 100)
         self.setWindowTitle('Memo pad')
         self.textEdit = QTextEdit(self)
+        #self.textEdit = QLineEdit(self)
         button = QPushButton(self.textEdit)
         button.setText("apply")
         button.clicked.connect(self.make_text_curves)
