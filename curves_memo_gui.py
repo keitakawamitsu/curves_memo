@@ -35,7 +35,6 @@ class MemoPad(QMainWindow):
         self.resize(400, 100)
         self.setWindowTitle('Memo pad')
         self.textEdit = QTextEdit(self)
-        #self.textEdit = QLineEdit(self)
         button = QPushButton(self.textEdit)
         button.setText("apply")
         button.clicked.connect(self.make_text_curves)
@@ -58,14 +57,13 @@ class MemoPad(QMainWindow):
         text = self.textEdit.toPlainText()
         cv = kmt_text.MakeCurves(text)
         cv.make_curves(text)
-        #cmds.textCurves( f='Times-Roman', t=a )
-        #print(self.textEdit.toPlainText())
+
 
 
 def main():
-    a=get_main_window()
+    mayaWindow=get_main_window()
     app = QApplication.instance()
-    memoPad = MemoPad(a)
+    memoPad = MemoPad(mayaWindow)
     memoPad.show()
     sys.exit()
     app.exec_()
