@@ -9,7 +9,7 @@ from PySide2.QtGui import*
 from PySide2.QtCore import*
 from PySide2.QtWidgets import*
 
-from . import kmt_text
+from . import kmt_make_curves
 
 def get_main_window():
     """Maya画面の後ろにいかせない"""
@@ -56,7 +56,7 @@ class MemoPad(QMainWindow):
     
     def make_text_curves(self):
         text = self.textEdit.toPlainText()
-        cv = kmt_text.MakeCurves(text)
+        cv = kmt_make_curves.MakeCurves(text)
         cv.make_curves(text)
 
 
