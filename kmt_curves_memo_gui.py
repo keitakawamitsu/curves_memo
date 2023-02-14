@@ -65,7 +65,7 @@ def main():
     app = QApplication.instance()
     memoPad = MemoPad(mayaWindow)
     memoPad.show()
-    sys.exit()
+    #sys.exit()
     app.exec_()
 
 if __name__ == "__main__":
